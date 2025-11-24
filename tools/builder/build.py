@@ -93,7 +93,7 @@ def build(image_name):
     prepare_workspace()
 
     source_dir = clone_source(recipe)
-    apply_patches(image_path, source_dir)
+    # apply_patches(image_path, source_dir)
     run_build_steps(recipe, source_dir)
 
     # Copy source into Docker build context
