@@ -1,0 +1,42 @@
+name: mysql
+version: 8.4.2
+upstream:
+  repo: https://github.com/mysql/mysql-server
+  tagPattern: "^mysql-([0-9.]+)$"
+
+dependencies:
+  build:
+    - cmake
+    - gcc
+    - g++
+    - make
+    - bzip2
+    - libncurses5-dev
+    - libssl-dev
+    - libaio-dev
+    - pkg-config
+    - libtirpc-dev
+    - libzstd-dev
+  runtime:
+    - libaio1
+    - openssl
+    - libncurses5
+
+build:
+  type: cmake
+  steps:
+    - mkdir build
+    - cd build
+    - cmake .. -DDOWNLOAD_BOOST=1 -DWITH_BOOST=../boost
+    - make -j$(nproc)
+    - make install DESTDIR=/opt/mysql
+
+patches:
+  - patches/fix-arm64-cmake.patch
+  - patches/remove-debug-flags.patch
+
+packager:
+  baseImage: "ubuntu:22.04"
+  installPrefix: "/opt/mysql"
+  entrypoint: "/opt/mysql/usr/local/mysql/bin/mysqld"
+  user: "1001"
