@@ -1,8 +1,9 @@
 name: mysql
-version: 8.4.2
+version: 8.4.7
 upstream:
   repo: https://github.com/mysql/mysql-server
   tagPattern: "^mysql-([0-9.]+)$"
+  tagPrefix: "mysql-"
 
 dependencies:
   build:

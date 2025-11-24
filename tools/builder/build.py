@@ -4,8 +4,8 @@ import subprocess
 import shutil
 import sys
 
-RECIPE_DIR = "containers/recipes"
-IMAGES_DIR = "containers/images"
+RECIPE_DIR = "recipes"
+IMAGES_DIR = "images"
 BUILD_DIR = "build/workspace"
 
 
